@@ -13,6 +13,7 @@ iarduino_OLED_txt oled(0x3C);
 #define VOLT_PIN A1
 #define VREF 5.102
 #define V_COEF 1.045
+//#define V_COEF 1.000
 #define DIV_R1 19680
 #define DIV_R2 1176
 
@@ -44,7 +45,7 @@ float readVoltageDC()
         sensorValue += analogRead(VOLT_PIN);
     }
     sensorValue = sensorValue >> 5;
-    sensorVoltage = sensorValue * VREF * V_COEF * ((DIV_R1 + DIV_R2) / DIV_R2) / ADC_COUNT;
+    sensorVoltage = ((float)sensorValue) * VREF * V_COEF * ((DIV_R1 + DIV_R2) / DIV_R2) / ADC_COUNT;
     return sensorVoltage;
 }
 
